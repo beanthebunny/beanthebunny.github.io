@@ -6,9 +6,58 @@
     <title>My Bunnies</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <style>
-        body {
+        /* Basic reset */
+        body, ul {
             margin: 0;
-            font-family: Arial, sans-serif;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar styles */
+        header {
+            background-color: #e0f7e0; /* Background color of the navbar */
+            padding: 10px 20px; /* Padding around the navbar */
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center; /* Center the navbar content */
+        }
+
+        .navbar-list {
+            list-style: none; /* Remove default list styling */
+            display: flex; /* Align list items horizontally */
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar-list li {
+            margin: 0 15px; /* Space between list items */
+        }
+
+        .navbar-list a {
+            color: #333; /* Text color */
+            text-decoration: none; /* Remove underline */
+            font-size: 16px; /* Font size */
+            padding: 8px 12px; /* Padding around links */
+            display: block; /* Make the links block level for padding to apply */
+            border-radius: 4px; /* Rounded corners */
+        }
+
+        .navbar-list a:hover {
+            background-color: #575757; /* Background color on hover */
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar-list {
+                flex-direction: column; /* Stack links vertically on smaller screens */
+                align-items: center; /* Center items */
+            }
+
+            .navbar-list li {
+                margin: 10px 0; /* Space between list items */
+            }
         }
         .container {
             display: flex;
@@ -39,7 +88,17 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <header>
+        <nav class="navbar">
+            <ul class="navbar-list">
+                <li><a href="https://www.example.com">Home</a></li>
+                <li><a href="https://www.example.com/about">About</a></li>
+                <li><a href="https://www.example.com/faq">FAQ</a></li>
+                <li><a href="https://www.example.com/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+<div class="container">
         <div class="left">
             <div class="photo">
                 <h1>Bean</h1>

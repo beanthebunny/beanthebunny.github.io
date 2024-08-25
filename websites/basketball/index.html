@@ -1,3 +1,82 @@
-<html>
-  <h1>9136249</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green and Yellow Photo Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f9f1; /* Light green background */
+            color: #333;
+        }
+        header {
+            background-color: #9bcd4f; /* Green header */
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .gallery-item {
+            flex: 1 1 calc(33.333% - 30px);
+            box-sizing: border-box;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 5px solid #ffeb3b; /* Yellow border */
+        }
+        footer {
+            background-color: #9bcd4f; /* Green footer */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Green and Yellow Photo Gallery</h1>
+    </header>
+    <div class="container">
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/9bcd4f/ffffff?text=Photo+1" alt="Photo 1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/9bcd4f/ffffff?text=Photo+2" alt="Photo 2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/9bcd4f/ffffff?text=Photo+3" alt="Photo 3">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/9bcd4f/ffffff?text=Photo+4" alt="Photo 4">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/9bcd4f/ffffff?text=Photo+5" alt="Photo 5">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/9bcd4f/ffffff?text=Photo+6" alt="Photo 6">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Green and Yellow Gallery</p>
+    </footer>
+</body>
 </html>

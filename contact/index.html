@@ -18,11 +18,30 @@
             background-color: #b2d8b2; /* Light Green Header Background */
             padding: 20px;
             text-align: center;
+            position: relative; /* To position the home button */
         }
 
         header h1 {
             margin: 0;
             color: #333;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #b2d8b2; /* Light Green Button Background */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .home-button:hover {
+            background-color: #a2c7a6; /* Slightly Darker Green on Hover */
         }
 
         main {
@@ -54,6 +73,7 @@
 </head>
 <body>
     <header>
+        <a href="index.html" class="home-button">Home</a>
         <h1>Contact Us</h1>
     </header>
 
@@ -61,9 +81,9 @@
         <div class="contact-container">
             <section class="contact-info">
                 <h2>Get in Touch</h2>
-                <p><strong>Email:</strong> your.email@example.com</p>
-                <p><strong>Phone:</strong> (123) 456-7890</p>
-                <p><strong>Address:</strong> 123 Rabbit Lane, Bunnyville, RB 45678</p>
+                <p><strong>Email:</strong> sproutlop@outlook.com</p>
+                <p><strong>Phone:</strong> (I don't have one)</p>
+                <p><strong>Address:</strong> 123 Rabbit Lane, Bunnyville, 123412</p>
             </section>
         </div>
     </main>

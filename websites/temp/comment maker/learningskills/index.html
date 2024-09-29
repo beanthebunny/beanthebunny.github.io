@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Skills Comment Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eafaf1;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c7a4f;
+        }
+        h2 {
+            color: #2f855a;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+            padding: 10px;
+            border: 2px solid #2c7a4f;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        button {
+            background-color: #2f855a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #276749;
+        }
+        .comment-container {
+            background-color: #f7f9f7;
+            padding: 10px;
+            border: 1px solid #2c7a4f;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Learning Skills Comment Generator</h1>
+    
+    <p><strong>Upload the file containing the learning skills responses:</strong> (Format: .txt)</p>
+    <input type="file" id="responsesFile" accept=".txt" />
+    
+    <p><strong>Upload the file containing student names, pronouns, and their skill levels:</strong> (Format: .txt)</p>
+    <input type="file" id="studentsFile" accept=".txt" />
+    
+    <button id="generateButton" onclick="generateComments()">Generate Comments</button>
+    
+    <h2>Generated Comments</h2>
+    <div id="output"></div>
+
+    <script>
+        let responses = {};
+        let studentsData = [];
+
+        document.getElementById('responsesFile').addEventListener('change', handleResponsesUpload);
+        document.getElementById('studentsFile').addEventListener('change', handleStudentsUpload);
+
+        function handleResponsesUpload(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const lines = e.target.result.split('\n');
+                lines.forEach(line => {
+                    const parts = line.split('#'); // Change here to split by #
+                    console.log('Processing response line:', line);
+                    if (parts.length === 5) { // Expecting 5 parts: Skill, E, G, S, N
+                        responses[parts[0].trim()] = {
+                            E: parts[1].trim(),
+                            G: parts[2].trim(),
+                            S: parts[3].trim(),
+                            N: parts[4].trim()
+                        };
+                        console.log(`Added response for ${parts[0].trim()}:`, responses[parts[0].trim()]);
+                    } else {
+                        console.error('Invalid response format, expected 5 parts:', line);
+                    }
+                });
+                console.log('All responses processed:', responses);
+            };
+            reader.readAsText(file);
+        }
+
+        function handleStudentsUpload(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                studentsData = e.target.result.split('\n').filter(line => line.trim() !== '');
+                console.log('Students data loaded:', studentsData);
+            };
+            reader.readAsText(file);
+        }
+
+        function generateComments() {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous comments
+            console.log('Generating comments...');
+
+            studentsData.forEach((line, lineIndex) => {
+                const parts = line.split(' ');
+
+                // Ensure we have enough parts: name, pronouns, and 6 skill levels
+                if (parts.length < 10) {
+                    console.error(`Line ${lineIndex + 1} has insufficient parts: ${line}`);
+                    return; // Skip this line
+                }
+
+                const studentName = parts[0]; // First part is the student's name
+                const lastName = parts[1]; // Second part is the last name
+                const pronouns = parts[2]; // Third part is the pronouns
+ 		const pronoun1 = parts[3];
+ 		const pronoun2 = parts[4];
+                const skills = parts.slice(5); // Remaining parts are skill levels
+                console.log(`Processing student: ${studentName} (${pronouns}) with skills:`, skills);
+
+                let comment = `<div class="comment-container"><strong>${studentName} (${lastName})</strong>: `;
+                const skillKeys = ['Collaboration', 'Responsibility', 'Initiative', 'Independence', 'Self-Regulation', 'Organization'];
+
+                skillKeys.forEach((skillKey, index) => {
+                    const level = skills[index] ? skills[index].trim() : ''; // Get the skill level correctly
+                    console.log(`Processing ${skillKey} for ${studentName}: Level - ${level}`);
+                    
+                    // Check for valid responses for each skill and level
+                    if (responses[skillKey] && responses[skillKey][level]) {
+                        const response = responses[skillKey][level]
+                            .replace(/\${studentName}/g, studentName)
+                            .replace(/\${lastName}/g, lastName)
+                            .replace(/\${pronoun1}/g, pronoun1)
+                            .replace(/\${pronoun2}/g, pronoun2)
+                            .replace(/\${pronouns}/g, pronouns); // Fixed semicolon here
+                        comment += response + ' '; // Append the response
+                    } else {
+                        console.error(`No response found for ${skillKey} at level ${level} (Line ${lineIndex + 1})`);
+                    }
+                });
+
+                comment = comment.trim(); 
+                comment += '</div>';
+                outputDiv.innerHTML += comment; // Append each comment to the output
+                console.log(`Generated comment for ${studentName}:`, comment);
+            });
+            console.log('All comments generated.');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+'#' is used to seperate between two sections.
+Varables you caan use within the sentence are:
+${studentName} for the first name
+${lastName} for the last name
+${pronouns} for his/her/their
+${pronoun1} for He/She/They
+${pronoun2} for he/she/they
+
+Default response format:
+Skill# E comment.# G comment.# S comment.# N comment.
+
+Student List Format:
+
+Bob Cook his He he E E E E E E
